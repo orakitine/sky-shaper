@@ -11,6 +11,8 @@ import { z } from "zod";
 import { useActions, useUIState } from "ai/rsc";
 import { AI } from "./actions";
 import { UserMessage } from "@/components/llm/message";
+import { NutrientDetailsCard } from "@/components/nutrition-details-card";
+import { nSample } from "../components/n-sample";
 
 const chatSchema = z.object({
   message: z.string().min(1, "Message is required."),

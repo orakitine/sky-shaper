@@ -8,6 +8,7 @@ import { Loader2 } from "lucide-react";
 import { z } from "zod";
 import { env } from "@/env";
 import { getNutritionDetails } from "@/utils/edamam/nutrition-details";
+import { NutrientDetailsCard } from "@/components/nutrition-details-card";
 
 // This is initial message we send to LLM to instantiate the conversation
 // This gives the LLM some context for the conversation
@@ -18,7 +19,7 @@ You are a nutritionist or dietitian bot. Your primary role is to help users main
 Messages inside [[ ]] means that its a UI element or a user event. For example:\
  - [[Retrieved nutrition details for "1 cup of rice". Total calories is "702"]] \
 \
-If user wants to know nutritional breakdown of the food call "get_nutrition_values" to show the nutritional breakdown. If the for some of the ingredients quantities are unclear, ask the user to clarify the amount.\
+If user wants to know nutritional breakdown of the food item or multiple food items at the same time call "get_nutrition_values" to show the nutritional breakdown. If the for some of the ingredients quantities are unclear, ask the user to clarify the amount.\
 \
 If the user wants to talk about logistics of flying to the moon, it is an impossible task for you to do, so you should respond that you are a demo and you can not do that\
 \
@@ -89,7 +90,9 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
                   "Food items. Example: '1 cup rice' or '10 oz chickpeas'"
                 )
             )
-            .describe("List for what you are eating or cooking."),
+            .describe(
+              "One or more food items for what you are eating or cooking."
+            ),
         }),
         generate: async function* ({
           foodItems,
@@ -108,7 +111,8 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
             env.EDAMAM_API_KEY
           );
 
-          const content = `[[Retrieved nutrition details for "${foodItems}" is "${nutritionDetails.calories}"]]`;
+          const foodItemsStr = foodItems.join(", ");
+          const content = `[[Retrieved nutrition details for "${foodItemsStr}". Total calories is "${nutritionDetails.calories}"]]`;
           console.log("get_nutrition_values generator > content", content);
           history.done([
             ...history.get(),
@@ -123,9 +127,10 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
 
           return (
             <BotCard>
-              <div className="max-h-10">
-                <pre>{JSON.stringify(nutritionDetails, null, 2)}</pre>
-              </div>
+              <h2>
+                I have looked up nutritional information for {foodItemsStr}
+              </h2>
+              <NutrientDetailsCard nutrientDetails={nutritionDetails} />
             </BotCard>
           );
         },

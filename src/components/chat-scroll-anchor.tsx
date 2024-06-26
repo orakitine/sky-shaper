@@ -10,14 +10,14 @@ export function ChatScrollAnchor() {
   const { ref, entry, inView } = useInView({
     trackVisibility,
     delay: 100,
-    rootMargin: "0px 0px -50px 0px",
+    rootMargin: "0px 0px -120px 0px",
   });
 
   useEffect(() => {
-    if (isAtBottom && trackVisibility && inView) {
+    if (isAtBottom && trackVisibility && !inView) {
       entry?.target.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, [isAtBottom, trackVisibility, inView, entry]);
 
-  return <div ref={ref} className="h-px w-full" />;
+  return <div ref={ref} className="w-full h-px" />;
 }
