@@ -1,5 +1,4 @@
-import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
@@ -7,7 +6,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "./ui/card";
+} from "../ui/card";
 
 interface NutrientDetailsCardProps {
   nutrientDetails: NutrientDetails;

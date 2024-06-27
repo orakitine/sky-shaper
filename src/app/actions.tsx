@@ -8,8 +8,9 @@ import { Loader2 } from "lucide-react";
 import { z } from "zod";
 import { env } from "@/env";
 import { getNutritionDetails } from "@/utils/edamam/nutrition-details";
-import { NutrientDetailsCard } from "@/components/nutrition-details-card";
+import { NutrientDetailsCard } from "@/components/llm/nutrition-details-card";
 import { FeedBack } from "@/components/feedback";
+import { NutrientDetailsCardSkeleton } from "@/components/llm/nutrition-details-card-skeleton";
 
 // This is initial message we send to LLM to instantiate the conversation
 // This gives the LLM some context for the conversation
@@ -107,7 +108,14 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
           title?: string;
         }) {
           console.log("get_nutrition_values generator", title, foodItems);
-          yield <BotCard>Looking up nutrients...</BotCard>;
+          const foodItemsStr = foodItems.join(", ");
+
+          yield (
+            <BotCard>
+              <p>Looking up nutritional information for {foodItemsStr}.</p>
+              <NutrientDetailsCardSkeleton />
+            </BotCard>
+          );
 
           const nutritionDetails = await getNutritionDetails(
             title || "Untitled",
@@ -116,7 +124,6 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
             env.EDAMAM_API_KEY
           );
 
-          const foodItemsStr = foodItems.join(", ");
           const content = `[[Retrieved nutrition details for "${foodItemsStr}". Total calories is "${nutritionDetails.calories}"]]`;
           console.log("get_nutrition_values generator > content", content);
           history.done([
@@ -132,9 +139,7 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
 
           return (
             <BotCard>
-              <h2>
-                I have looked up nutritional information for {foodItemsStr}
-              </h2>
+              <p>I have looked up nutritional information for {foodItemsStr}</p>
               <FeedBack />
               <NutrientDetailsCard nutrientDetails={nutritionDetails} />
             </BotCard>
