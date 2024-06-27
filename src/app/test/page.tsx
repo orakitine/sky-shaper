@@ -7,6 +7,7 @@ export default function Test() {
   return (
     <>
       <NutrientDetailsCard nutrientDetails={nSample} />
+      <hr className="my-8" />
       <FeedBack />
     </>
   );

@@ -4,7 +4,7 @@ import { ReactNode } from "react";
 
 export function UserMessage({ children }: { children: ReactNode }) {
   return (
-    <div className="relative flex items-start group">
+    <div className="flex items-start gap-2">
       <div className="flex justify-center items-center bg-background shadow-sm border rounded-md w-8 h-8 select-none shrink-0">
         <UserIcon />
       </div>
@@ -23,7 +23,7 @@ export function BotMessage({
   className?: string;
 }) {
   return (
-    <div className="relative flex items-start md:-mr-12 group">
+    <div className="flex items-start gap-2">
       <div className="flex justify-center items-center bg-background shadow-sm border rounded-md w-8 h-8 select-none shrink-0">
         <Sparkle />
       </div>
@@ -42,7 +42,7 @@ export function BotCard({
   showAvatar?: boolean;
 }) {
   return (
-    <div className="relative flex items-start md:-mr-12 group">
+    <div className="flex items-start gap-2">
       <div
         className={cn(
           "flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-md border shadow-sm bg-primary text-primary-foreground",
@@ -58,7 +58,7 @@ export function BotCard({
 
 export function AssistantMessage({ children }: { children: ReactNode }) {
   return (
-    <div className="flex justify-center items-center gap-2 mt-2 text-green-500 text-xs">
+    <div className="flex justify-center items-center mt-2 text-green-500 text-xs">
       <div className="flex-initial p-2 max-w-[600px]">{children}</div>
     </div>
   );
