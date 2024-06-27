@@ -4,11 +4,11 @@ import { ReactNode } from "react";
 
 export function UserMessage({ children }: { children: ReactNode }) {
   return (
-    <div className="group  relative flex items-start md:-ml-12">
-      <div className="flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-md border shadow-sm bg-background">
+    <div className="relative flex items-start group">
+      <div className="flex justify-center items-center bg-background shadow-sm border rounded-md w-8 h-8 select-none shrink-0">
         <UserIcon />
       </div>
-      <div className=" ml-4 flex-1 space-y-2 overflow-hidden px1">
+      <div className="flex-1 space-y-2 ml-4 overflow-hidden px1">
         {children}
       </div>
     </div>
@@ -23,8 +23,8 @@ export function BotMessage({
   className?: string;
 }) {
   return (
-    <div className="group relative flex items-start md:-mr-12">
-      <div className="flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-md border shadow-sm bg-background">
+    <div className="relative flex items-start md:-mr-12 group">
+      <div className="flex justify-center items-center bg-background shadow-sm border rounded-md w-8 h-8 select-none shrink-0">
         <Sparkle />
       </div>
       <div className={cn("ml-4 flex-1 space-y-2 overflow-hidden px1")}>
@@ -42,7 +42,7 @@ export function BotCard({
   showAvatar?: boolean;
 }) {
   return (
-    <div className="group relative flex items-start md:-mr-12">
+    <div className="relative flex items-start md:-mr-12 group">
       <div
         className={cn(
           "flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-md border shadow-sm bg-primary text-primary-foreground",
@@ -51,15 +51,15 @@ export function BotCard({
       >
         <Sparkle />
       </div>
-      <div className="ml-4 flex-1 px1">{children}</div>
+      <div className="flex-1 ml-4 px1">{children}</div>
     </div>
   );
 }
 
 export function AssistantMessage({ children }: { children: ReactNode }) {
   return (
-    <div className="mt-2 flex items-center justify-center gap-2 text-xs text-green-500">
-      <div className="max-w-[600px] flex-initial p-2">{children}</div>
+    <div className="flex justify-center items-center gap-2 mt-2 text-green-500 text-xs">
+      <div className="flex-initial p-2 max-w-[600px]">{children}</div>
     </div>
   );
 }

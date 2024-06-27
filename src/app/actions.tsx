@@ -9,6 +9,7 @@ import { z } from "zod";
 import { env } from "@/env";
 import { getNutritionDetails } from "@/utils/edamam/nutrition-details";
 import { NutrientDetailsCard } from "@/components/nutrition-details-card";
+import { FeedBack } from "@/components/feedback";
 
 // This is initial message we send to LLM to instantiate the conversation
 // This gives the LLM some context for the conversation
@@ -73,7 +74,11 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
       if (done) {
         history.done([...history.get(), { role: "assistant", content }]);
       }
-      return <BotMessage>{content}</BotMessage>;
+      return (
+        <BotMessage>
+          {content} <FeedBack />
+        </BotMessage>
+      );
     },
     temperature: 0,
     tools: {
@@ -130,6 +135,7 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
               <h2>
                 I have looked up nutritional information for {foodItemsStr}
               </h2>
+              <FeedBack />
               <NutrientDetailsCard nutrientDetails={nutritionDetails} />
             </BotCard>
           );

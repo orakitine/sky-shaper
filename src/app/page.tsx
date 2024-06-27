@@ -27,7 +27,6 @@ export default function Home() {
   const { sendMessage } = useActions<typeof AI>();
 
   const onSubmit: SubmitHandler<ChatInput> = async (data) => {
-    console.log("onSubmit", data);
     const value = data.message.trim();
     formRef.current?.reset();
     if (!value) return;
@@ -51,7 +50,12 @@ export default function Home() {
   return (
     <main>
       <div className="pt-4 md:pt-10 pb-[200px]">
-        <h1>Sky Shaper</h1>
+        <h1 className="text-center text-xl">Sky Shaper</h1>
+        {messages.length === 0 && (
+          <div className="mt-8 text-center text-slate-400 text-sm">
+            <p>Start a conversation by typing a message.</p>
+          </div>
+        )}
         <ChatList messages={messages} />
         <ChatScrollAnchor />
       </div>
