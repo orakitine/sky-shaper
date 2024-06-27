@@ -11,8 +11,6 @@ import { z } from "zod";
 import { useActions, useUIState } from "ai/rsc";
 import { AI } from "./actions";
 import { UserMessage } from "@/components/llm/message";
-import { NutrientDetailsCard } from "@/components/nutrition-details-card";
-import { nSample } from "../components/n-sample";
 
 const chatSchema = z.object({
   message: z.string().min(1, "Message is required."),
@@ -59,9 +57,9 @@ export default function Home() {
         <ChatList messages={messages} />
         <ChatScrollAnchor />
       </div>
-      <div className="peer-[[data--state=open]]:group-[]:lg:pl-[250px] peer-[[data-sate=open]]:group=[]:xl:pl-[300px] bottom-0 fixed inset-x-0 bg-gradient-to-b from-0% from-muted/30 to-50% to-muted/30 w-full">
+      <div className="bottom-0 fixed inset-x-0 w-full">
         <div className="mx-auto sm:px-4 sm:max-w-2xl">
-          <div className="flex flex-col justify-center space-y-4 bg-background bg-white shadow-lg px-3 py-2 md:py-4 sm:border border-t sm:rounded-t-xl">
+          <div className="flex flex-col justify-center space-y-4 bg-background bg-white shadow-lg md:py-4 p-3 sm:border border-t sm:rounded-t-xl">
             <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)}>
               <div className="relative flex flex-col bg-background sm:border sm:rounded-md w-full max-h-60 overflow-hidden grow">
                 <TextareaAutosize
@@ -76,7 +74,7 @@ export default function Home() {
                   rows={1}
                   {...form.register("message")}
                 />
-                <div className="top-4 right-0 sm:right-4 absolute">
+                <div className="top-3 right-0 sm:right-4 absolute">
                   <Button
                     type="submit"
                     size="icon"
@@ -88,18 +86,19 @@ export default function Home() {
                 </div>
               </div>
             </form>
-            <Button
-              variant="outline"
-              size="lg"
-              className="bg-background mt-4 p-4 rounded-full"
-              onClick={(e) => {
-                e.preventDefault();
-                window.location.reload();
-              }}
-            >
-              <Plus className="w-5 h-5" />
-              <span>New Chat</span>
-            </Button>
+            <div className="flex justify-center">
+              <Button
+                variant="outline"
+                className="bg-background p-4 rounded-full"
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.reload();
+                }}
+              >
+                <Plus className="w-5 h-5" />
+                <span>New Chat</span>
+              </Button>
+            </div>
           </div>
         </div>
       </div>
