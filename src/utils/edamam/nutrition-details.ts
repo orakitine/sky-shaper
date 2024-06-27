@@ -3,7 +3,7 @@ export async function getNutritionDetails(
   ingredients: string[],
   appId: string,
   appKey: string
-): Promise<NutrientDetails> {
+): Promise<NutrientDetails | false> {
   const url = `https://api.edamam.com/api/nutrition-details?app_id=${appId}&app_key=${appKey}`;
 
   const body = {
@@ -21,9 +21,7 @@ export async function getNutritionDetails(
     });
 
     if (!response.ok) {
-      throw new Error(
-        `HTTP error! in getNutritionDetails status: ${response.status}`
-      );
+      return false;
     }
 
     const data: NutrientDetails = await response.json();
@@ -31,7 +29,7 @@ export async function getNutritionDetails(
     return data;
   } catch (error) {
     console.error("Error in getNutritionDetails:", error);
-    throw error;
+    return false;
   }
 }
 

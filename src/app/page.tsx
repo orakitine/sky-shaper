@@ -90,7 +90,6 @@ export default function Home() {
             {/* Chat input */}
             <div className="relative w-full">
               <ChatScrollAnchor />
-
               <div className="mx-auto sm:px-4 sm:max-w-2xl">
                 <div className="flex flex-col justify-center space-y-4 bg-background bg-white shadow-lg md:py-4 p-3 sm:border border-t sm:rounded-t-xl">
                   <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)}>

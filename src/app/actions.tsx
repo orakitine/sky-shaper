@@ -20,17 +20,20 @@ You are a nutritionist or dietitian bot. Your primary role is to help users main
 \
 Messages inside [[ ]] means that its a UI element or a user event. For example:\
  - [[Retrieved nutrition details for "1 cup of rice". Total calories is "702"]] \
+ - [[Failed to retrieve nutrition details for [["1 cup of rice"]] \
 \
-If user wants to know nutritional breakdown of the food item or multiple food items at the same time call "get_nutrition_values" to show the nutritional breakdown. If the for some of the ingredients quantities are unclear, ask the user to clarify the amount.\
+DO\'s:\
+If user wants to know nutritional breakdown of the food item or multiple food items at the same time call "get_nutrition_values_for_all_items" to show the nutritional breakdown. always try to search for multiple items at the same time. If the for some of the ingredients quantities are unclear, ask the user to clarify the amount.\
 \
+DON\'Ts:\
 If the user wants to talk about logistics of flying to the moon, it is an impossible task for you to do, so you should respond that you are a demo and you can not do that\
 \
-If the user wants anything else unrelated to the function calls "get_nutrition_values", you should chat with the user and answer any questions they may have and steer conversation towards general nutrition and dietary topics.\
+If the user wants anything else unrelated to the function calls "get_nutrition_values_for_all_items", you should chat with the user and answer any questions they may have and steer conversation towards general nutrition and dietary topics.\
 ';
 
 export type ServerMessage = {
   id?: number;
-  name?: "get_nutrition_values";
+  name?: "get_nutrition_values_for_all_items";
   role: "user" | "assistant" | "system";
   content: string;
 };
@@ -58,14 +61,8 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
 
   const reply = await streamUI({
     model: openai("gpt-4o-2024-05-13"),
-    messages: [
-      {
-        role: "system",
-        content,
-        toolInvocation: [],
-      },
-      ...history.get(),
-    ],
+    system: content,
+    messages: history.get(),
     initial: (
       <BotMessage className="flex justify-center items-center select-none shrink-0">
         <Loader2 className="w-5 animate-spin stroke-zinc-900" />
@@ -83,9 +80,9 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
     },
     temperature: 0,
     tools: {
-      get_nutrition_values: {
+      get_nutrition_values_for_all_items: {
         description:
-          "Get the nutritional analysis for the recipe or a meal based on list of food items and its quantity. Optionally specify the recipe title. When possible keep ingredient lines short and do not include cooking instruction in the ingredient list. Example: '1 cup rice', '10 oz chickpeas'.",
+          "Get the nutritional analysis for the recipe or a meal based on list of food items and its quantity. Optionally specify the recipe title. When possible keep ingredient lines short and do not include cooking instruction in the ingredient list. Example: ['1 cup rice'], ['10 oz chickpeas', '30g canned tuna'].",
         parameters: z.object({
           title: z.string().optional().describe("Title of the recipe."),
           foodItems: z
@@ -107,7 +104,11 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
           foodItems: string[];
           title?: string;
         }) {
-          console.log("get_nutrition_values generator", title, foodItems);
+          console.log(
+            "get_nutrition_values_for_all_items generator",
+            title,
+            foodItems
+          );
           const foodItemsStr = foodItems.join(", ");
 
           yield (
@@ -124,26 +125,57 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
             env.EDAMAM_API_KEY
           );
 
-          const content = `[[Retrieved nutrition details for "${foodItemsStr}". Total calories is "${nutritionDetails.calories}"]]`;
-          console.log("get_nutrition_values generator > content", content);
-          history.done([
-            ...history.get(),
-            {
-              role: "assistant",
-              name: "get_nutrition_values",
-              content,
-            },
-          ]);
+          if (!nutritionDetails) {
+            const content = `[[Failed to retrieve nutrition details for "${foodItemsStr}"]]`;
+            console.log(
+              "get_nutrition_values_for_all_items generator > content",
+              content
+            );
+            history.done([
+              ...history.get(),
+              {
+                role: "assistant",
+                name: "get_nutrition_values_for_all_items",
+                content,
+              },
+            ]);
 
-          // TODO: Store the nutrition details in the state
+            return (
+              <BotCard>
+                <p>
+                  Sorry, I could not find nutritional information for{" "}
+                  {foodItemsStr}
+                </p>
+                <FeedBack />
+              </BotCard>
+            );
+          } else {
+            const content = `[[Retrieved nutrition details for "${foodItemsStr}". Total calories is "${nutritionDetails.calories}"]]`;
+            console.log(
+              "get_nutrition_values_for_all_items generator > content",
+              content
+            );
+            history.done([
+              ...history.get(),
+              {
+                role: "assistant",
+                name: "get_nutrition_values_for_all_items",
+                content,
+              },
+            ]);
 
-          return (
-            <BotCard>
-              <p>I have looked up nutritional information for {foodItemsStr}</p>
-              <FeedBack />
-              <NutrientDetailsCard nutrientDetails={nutritionDetails} />
-            </BotCard>
-          );
+            // TODO: Store the nutrition details in the state
+
+            return (
+              <BotCard>
+                <p>
+                  I have looked up nutritional information for {foodItemsStr}
+                </p>
+                <FeedBack />
+                <NutrientDetailsCard nutrientDetails={nutritionDetails} />
+              </BotCard>
+            );
+          }
         },
       },
     },
