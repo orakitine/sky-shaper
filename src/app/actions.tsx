@@ -23,7 +23,7 @@ Messages inside [[ ]] means that its a UI element or a user event. For example:\
  - [[Failed to retrieve nutrition details for [["1 cup of rice"]] \
 \
 DO\'s:\
-If user wants to know nutritional breakdown of the food item or multiple food items at the same time call "get_nutrition_values_for_all_items" to show the nutritional breakdown. always try to search for multiple items at the same time. If the for some of the ingredients quantities are unclear, ask the user to clarify the amount.\
+If user wants to know nutritional breakdown of the food item or multiple food items at the same time call "get_nutrition_values_for_all_items" to show the nutritional breakdown. always try to search for all items user have mentioned at the same time. If the for some of the ingredients quantities are unclear, ask the user to clarify the amount.\
 \
 DON\'Ts:\
 If the user wants to talk about logistics of flying to the moon, it is an impossible task for you to do, so you should respond that you are a demo and you can not do that\
@@ -36,6 +36,7 @@ export type ServerMessage = {
   name?: "get_nutrition_values_for_all_items";
   role: "user" | "assistant" | "system";
   content: string;
+  myData?: any;
 };
 
 export type ClientMessage = {
@@ -43,6 +44,7 @@ export type ClientMessage = {
   role: "user" | "assistant";
   display: ReactNode;
   toolInvocation?: ToolInvocation[];
+  myData?: any;
 };
 
 export type AIState = ServerMessage[];
@@ -104,11 +106,6 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
           foodItems: string[];
           title?: string;
         }) {
-          console.log(
-            "get_nutrition_values_for_all_items generator",
-            title,
-            foodItems
-          );
           const foodItemsStr = foodItems.join(", ");
 
           yield (
@@ -127,10 +124,7 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
 
           if (!nutritionDetails) {
             const content = `[[Failed to retrieve nutrition details for "${foodItemsStr}"]]`;
-            console.log(
-              "get_nutrition_values_for_all_items generator > content",
-              content
-            );
+
             history.done([
               ...history.get(),
               {
@@ -151,20 +145,21 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
             );
           } else {
             const content = `[[Retrieved nutrition details for "${foodItemsStr}". Total calories is "${nutritionDetails.calories}"]]`;
-            console.log(
-              "get_nutrition_values_for_all_items generator > content",
-              content
-            );
+            console.log("nutritionDetails", {
+              role: "assistant",
+              name: "get_nutrition_values_for_all_items",
+              content,
+              myData: nutritionDetails,
+            });
             history.done([
               ...history.get(),
               {
                 role: "assistant",
                 name: "get_nutrition_values_for_all_items",
                 content,
+                myData: nutritionDetails,
               },
             ]);
-
-            // TODO: Store the nutrition details in the state
 
             return (
               <BotCard>

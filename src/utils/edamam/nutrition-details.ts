@@ -38,3 +38,22 @@ export function parseCalories(nutrients: NutrientDetails): number {
   const calories = nutrients.calories;
   return calories;
 }
+
+export const emptyNutrientDetails: NutrientDetails = {
+  uri: "",
+  yield: 0,
+  calories: 0,
+  totalCO2Emissions: 0,
+  co2EmissionsClass: "",
+  totalWeight: 0,
+  dietLabels: [],
+  healthLabels: [],
+  cautions: [],
+  totalNutrients: {},
+  totalDaily: {},
+  ingredients: [],
+  cuisineType: [],
+  mealType: [],
+  dishType: [],
+  totalNutrientsKCal: {},
+};

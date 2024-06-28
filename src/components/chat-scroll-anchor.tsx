@@ -14,9 +14,7 @@ export function ChatScrollAnchor() {
   });
 
   useEffect(() => {
-    console.log("isAtBottom", isAtBottom, "inView", inView);
     if (isAtBottom && trackVisibility && !inView) {
-      console.log("scrolling into view");
       entry?.target.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, [isAtBottom, trackVisibility, inView, entry]);

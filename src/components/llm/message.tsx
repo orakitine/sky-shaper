@@ -4,13 +4,17 @@ import { ReactNode } from "react";
 
 export function UserMessage({ children }: { children: ReactNode }) {
   return (
-    <div className="flex items-start gap-2">
-      <div className="flex justify-center items-center bg-background shadow-sm border rounded-md w-8 h-8 select-none shrink-0">
-        <UserIcon />
+    <div className="flex items-start gap-4">
+      <div className="flex justify-center items-center shadow-sm border rounded-md w-8 h-8 shrink-0">
+        <img
+          src="https://api.dicebear.com/9.x/avataaars-neutral/svg?seed=22&flip=true"
+          width={36}
+          height={36}
+          alt="Avatar"
+          className="filter grayscale"
+        />
       </div>
-      <div className="flex-1 space-y-2 ml-4 overflow-hidden px1">
-        {children}
-      </div>
+      <div className="flex-1 pt-1 text-muted-foreground">{children}</div>
     </div>
   );
 }
@@ -23,13 +27,16 @@ export function BotMessage({
   className?: string;
 }) {
   return (
-    <div className="flex items-start gap-2">
-      <div className="flex justify-center items-center bg-background shadow-sm border rounded-md w-8 h-8 select-none shrink-0">
+    <div className="flex items-start gap-4">
+      <div
+        className={cn(
+          "flex justify-center items-center bg-background shadow-sm border rounded-md w-8 h-8 select-none shrink-0",
+          className
+        )}
+      >
         <Sparkle />
       </div>
-      <div className={cn("ml-4 flex-1 space-y-2 overflow-hidden px1")}>
-        {children}
-      </div>
+      <div className="flex-1 pt-1 text-muted-foreground">{children}</div>
     </div>
   );
 }
@@ -42,7 +49,7 @@ export function BotCard({
   showAvatar?: boolean;
 }) {
   return (
-    <div className="flex items-start gap-2">
+    <div className="flex items-start gap-4">
       <div
         className={cn(
           "flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-md border shadow-sm bg-primary text-primary-foreground",
@@ -51,15 +58,15 @@ export function BotCard({
       >
         <Sparkle />
       </div>
-      <div className="flex-1 ml-4 px1">{children}</div>
+      <div className="flex-1 pt-1 text-muted-foreground">{children}</div>
     </div>
   );
 }
 
 export function AssistantMessage({ children }: { children: ReactNode }) {
   return (
-    <div className="flex justify-center items-center mt-2 text-green-500 text-xs">
-      <div className="flex-initial p-2 max-w-[600px]">{children}</div>
+    <div className="flex">
+      <div className="flex-1 pt-1 text-muted-foreground">{children}</div>
     </div>
   );
 }

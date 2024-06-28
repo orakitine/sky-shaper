@@ -3,21 +3,21 @@ import { Button } from "./ui/button";
 
 export function FeedBack() {
   return (
-    <div className="inline-flex items-center gap-0.5 p-0.5">
+    <div className="flex items-center gap-2 py-2">
       <Button
-        variant="outline"
+        variant="ghost"
         size="icon"
-        className="hover:bg-transparent rounded-md w-5 h-5 text-muted-foreground hover:text-secondary"
+        className="hover:bg-transparent w-4 h-4 text-stone-400 hover:text-stone-900"
       >
-        <ThumbsUpIcon className="w-3 h-3" />
+        <ThumbsUpIcon className="w-4 h-4" />
         <span className="sr-only">Upvote</span>
       </Button>
       <Button
-        variant="outline"
+        variant="ghost"
         size="icon"
-        className="hover:bg-transparent rounded-md w-5 h-5 text-muted-foreground hover:text-secondary"
+        className="hover:bg-transparent w-4 h-4 text-stone-400 hover:text-stone-900"
       >
-        <ThumbsDownIcon className="w-3 h-3" />
+        <ThumbsDownIcon className="w-4 h-4" />
         <span className="sr-only">Downvote</span>
       </Button>
     </div>

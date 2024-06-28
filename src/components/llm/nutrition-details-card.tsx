@@ -2,7 +2,6 @@ import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -10,32 +9,35 @@ import {
 
 interface NutrientDetailsCardProps {
   nutrientDetails: NutrientDetails;
+  title?: string;
+  showFooter?: boolean;
 }
 
 export function NutrientDetailsCard({
   nutrientDetails,
+  title = "Nutrition Facts",
+  showFooter = true,
 }: NutrientDetailsCardProps) {
+  console.log("NutrientDetailsCard", nutrientDetails);
   return (
-    <Card className="sm:max-w-80">
+    <Card className="sm:w-96">
       <CardHeader>
-        <CardTitle>Nutrition Facts</CardTitle>
-        <CardDescription>
-          {nutrientDetails.ingredients.map((ingredient, index) => (
-            <span key={index}>{ingredient.text}</span>
-          ))}
-        </CardDescription>
+        <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent>
+        <div className="space-y-2 pb-4">
+          {nutrientDetails.ingredients.map((ingredient, index) => (
+            <div className="text-muted-foreground text-sm" key={index}>
+              {ingredient.text}
+            </div>
+          ))}
+        </div>
         <div className="flex justify-between font-bold text-xl">
           <span>Calories</span>
           <span>{nutrientDetails.calories}</span>
         </div>
         <div className="border-gray-300 my-2 border-t-2" />
-        <div className="flex justify-end font-medium text-sm">
-          <span>% Daily Value*</span>
-        </div>
-        <div className="border-gray-300 my-2 border-t" />
-        <div className="max-h-[300px] overflow-auto">
+        <div className="max-h-40 overflow-auto">
           {Object.entries(nutrientDetails.totalNutrients)
             .filter(nutrientsFilterFn)
             .map(nutrientsTransformFn)
@@ -56,13 +58,17 @@ export function NutrientDetailsCard({
               );
             })}
         </div>
-        <div className="mt-4 text-center text-gray-400 text-xs">
-          *Percent Daily Values are based on a 2000 calorie diet
-        </div>
+        {nutrientDetails.calories > 0 && (
+          <div className="mt-4 text-center text-gray-400 text-xs">
+            *Percent Daily Values are based on a 2000 calorie diet
+          </div>
+        )}
       </CardContent>
-      <CardFooter className="flex justify-end">
-        <Button variant="outline">Add to my total</Button>
-      </CardFooter>
+      {showFooter && (
+        <CardFooter className="flex justify-end">
+          <Button variant="outline">Add to my total</Button>
+        </CardFooter>
+      )}
     </Card>
   );
 }

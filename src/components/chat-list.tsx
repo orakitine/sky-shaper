@@ -12,6 +12,7 @@ export function ChatList({ messages }: MessagesProps) {
       {messages.map((message) => (
         <div key={message.id} className="pb-4">
           {message.display}
+          {message.myData && <pre>{message.myData}</pre>}
         </div>
       ))}
     </div>
