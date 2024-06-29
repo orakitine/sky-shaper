@@ -36,7 +36,6 @@ export type ServerMessage = {
   name?: "get_nutrition_values_for_all_items";
   role: "user" | "assistant" | "system";
   content: string;
-  myData?: any;
 };
 
 export type ClientMessage = {
@@ -44,7 +43,6 @@ export type ClientMessage = {
   role: "user" | "assistant";
   display: ReactNode;
   toolInvocation?: ToolInvocation[];
-  myData?: any;
 };
 
 export type AIState = ServerMessage[];
@@ -145,19 +143,12 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
             );
           } else {
             const content = `[[Retrieved nutrition details for "${foodItemsStr}". Total calories is "${nutritionDetails.calories}"]]`;
-            console.log("nutritionDetails", {
-              role: "assistant",
-              name: "get_nutrition_values_for_all_items",
-              content,
-              myData: nutritionDetails,
-            });
             history.done([
               ...history.get(),
               {
                 role: "assistant",
                 name: "get_nutrition_values_for_all_items",
                 content,
-                myData: nutritionDetails,
               },
             ]);
 
@@ -167,7 +158,10 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
                   I have looked up nutritional information for {foodItemsStr}
                 </p>
                 <FeedBack />
-                <NutrientDetailsCard nutrientDetails={nutritionDetails} />
+                <NutrientDetailsCard
+                  nutrientDetails={nutritionDetails}
+                  size="compact"
+                />
               </BotCard>
             );
           }

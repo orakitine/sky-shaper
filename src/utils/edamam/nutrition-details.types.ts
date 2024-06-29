@@ -1,17 +1,17 @@
 // Interface for nutrient details
-interface Nutrient {
+export interface Nutrient {
   label: string;
   quantity: number;
   unit: string;
 }
 
 // Interface for totalNutrients and totalDaily sections
-interface Nutrients {
+export interface Nutrients {
   [key: string]: Nutrient;
 }
 
 // Interface for parsed ingredient
-interface ParsedIngredient {
+export interface ParsedIngredient {
   quantity: number;
   measure: string;
   foodMatch: string;
@@ -25,13 +25,13 @@ interface ParsedIngredient {
 }
 
 // Interface for ingredient
-interface Ingredient {
+export interface Ingredient {
   text: string;
   parsed: ParsedIngredient[];
 }
 
 // Main interface for the NutrientDetails
-interface NutrientDetails {
+export interface NutrientDetails {
   uri: string;
   yield: number;
   calories: number;

@@ -1,3 +1,6 @@
+"use client";
+
+import { useTotalNutrient } from "@/lib/total-nutrient-context";
 import { Button } from "../ui/button";
 import {
   Card,
@@ -6,19 +9,27 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import {
+  Nutrient,
+  NutrientDetails,
+} from "@/utils/edamam/nutrition-details.types";
+import { cn } from "@/lib/utils";
 
 interface NutrientDetailsCardProps {
   nutrientDetails: NutrientDetails;
+  size?: "compact" | "expanded";
   title?: string;
   showFooter?: boolean;
 }
 
 export function NutrientDetailsCard({
   nutrientDetails,
+  size = "expanded",
   title = "Nutrition Facts",
   showFooter = true,
 }: NutrientDetailsCardProps) {
-  console.log("NutrientDetailsCard", nutrientDetails);
+  const { addNutrientDetails } = useTotalNutrient();
+
   return (
     <Card className="sm:w-96">
       <CardHeader>
@@ -37,7 +48,13 @@ export function NutrientDetailsCard({
           <span>{nutrientDetails.calories}</span>
         </div>
         <div className="border-gray-300 my-2 border-t-2" />
-        <div className="max-h-40 overflow-auto">
+        <div
+          className={cn(
+            "overflow-auto",
+            size === "compact" && "max-h-40",
+            size === "expanded" && "max-h-96"
+          )}
+        >
           {Object.entries(nutrientDetails.totalNutrients)
             .filter(nutrientsFilterFn)
             .map(nutrientsTransformFn)
@@ -66,7 +83,14 @@ export function NutrientDetailsCard({
       </CardContent>
       {showFooter && (
         <CardFooter className="flex justify-end">
-          <Button variant="outline">Add to my total</Button>
+          <Button
+            onClick={() => {
+              addNutrientDetails(nutrientDetails);
+            }}
+            variant="outline"
+          >
+            Add to my total
+          </Button>
         </CardFooter>
       )}
     </Card>

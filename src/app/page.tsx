@@ -20,7 +20,7 @@ import {
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
 import { NutrientDetailsCard } from "@/components/llm/nutrition-details-card";
-import { emptyNutrientDetails } from "@/utils/edamam/nutrition-details";
+import { useTotalNutrient } from "@/lib/total-nutrient-context";
 
 const chatSchema = z.object({
   message: z.string().min(1, "Message is required."),
@@ -29,6 +29,7 @@ const chatSchema = z.object({
 export type ChatInput = z.infer<typeof chatSchema>;
 
 export default function Home() {
+  const { totalNutrientDetails } = useTotalNutrient();
   const form = useForm<ChatInput>();
   const { formRef, onKeyDown } = useEnterSubmit();
   const [messages, setMessages] = useUIState<typeof AI>();
@@ -49,10 +50,6 @@ export default function Home() {
 
     try {
       const responseMessage = await sendMessage(value);
-      console.log("responseMessage", responseMessage);
-      if (responseMessage.myData) {
-        console.log("responseMessage.myData", responseMessage.myData);
-      }
       setMessages((currentMessages) => [...currentMessages, responseMessage]);
     } catch (error) {
       console.error(error);
@@ -137,9 +134,9 @@ export default function Home() {
           </form>
         </div>
         <div className="md:flex justify-center hidden bg-slate-50 pt-20">
-          <div>
+          <div className="fixed">
             <NutrientDetailsCard
-              nutrientDetails={emptyNutrientDetails}
+              nutrientDetails={totalNutrientDetails}
               title="Total"
               showFooter={false}
             />
