@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { ChatList } from "@/components/chat-list";
@@ -21,6 +22,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { NutrientDetailsCard } from "@/components/llm/nutrition-details-card";
 import { useTotalNutrient } from "@/lib/total-nutrient-context";
+import { LogoutButton } from "@/components/auth/logout-button";
 
 const chatSchema = z.object({
   message: z.string().min(1, "Message is required."),
@@ -86,7 +88,9 @@ export default function Home() {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem>
+                <LogoutButton />
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

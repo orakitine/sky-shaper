@@ -11,6 +11,8 @@ export const env = createEnv({
     OPENAI_API_KEY: z.string(),
     EDAMAM_API_KEY: z.string(),
     EDAMAM_APP_ID: z.string(),
+    NEXT_PUBLIC_SUPABASE_URL: z.string(),
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string(),
   },
   /*
    * Environment variables available on the client (and server).
@@ -28,5 +30,7 @@ export const env = createEnv({
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     EDAMAM_API_KEY: process.env.EDAMAM_API_KEY,
     EDAMAM_APP_ID: process.env.EDAMAM_APP_ID,
+    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   },
 });
