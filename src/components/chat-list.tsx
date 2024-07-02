@@ -1,4 +1,4 @@
-import { UIState } from "@/app/(protected)/actions";
+import { UIState } from "@/app/(protected)/dashboard/actions";
 
 interface MessagesProps {
   messages: UIState;
