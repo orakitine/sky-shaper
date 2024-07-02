@@ -1,4 +1,3 @@
-import { NutrientDetailsCard } from "@/components/llm/nutrition-details-card";
 import React from "react";
 import { FeedBack } from "@/components/feedback";
 import { NutrientDetailsCardSkeleton } from "@/components/llm/nutrition-details-card-skeleton";

@@ -6,13 +6,7 @@ export function UserMessage({ children }: { children: ReactNode }) {
   return (
     <div className="flex items-start gap-4">
       <div className="flex justify-center items-center shadow-sm border rounded-md w-8 h-8 shrink-0">
-        <img
-          src="https://api.dicebear.com/9.x/avataaars-neutral/svg?seed=22&flip=true"
-          width={36}
-          height={36}
-          alt="Avatar"
-          className="filter grayscale"
-        />
+        <UserIcon />
       </div>
       <div className="flex-1 pt-1 text-muted-foreground">{children}</div>
     </div>
