@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
+export const dynamic = "force-dynamic";
 
 import { ChatList } from "@/components/chat-list";
 import { ChatScrollAnchor } from "@/components/chat-scroll-anchor";
