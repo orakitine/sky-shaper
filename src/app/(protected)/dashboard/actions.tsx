@@ -12,6 +12,7 @@ import { NutrientDetailsCard } from "@/components/llm/nutrition-details-card";
 import { FeedBack } from "@/components/feedback";
 import { NutrientDetailsCardSkeleton } from "@/components/llm/nutrition-details-card-skeleton";
 import { airbender } from "./setup";
+import { getSessionFromServer } from "@/app/(protected)/dashboard/getSession";
 
 const { llm: streamUI } = airbender.sdk("default");
 
@@ -53,6 +54,8 @@ export type UIState = ClientMessage[];
 
 export const sendMessage = async (message: string): Promise<ClientMessage> => {
   const history = getMutableAIState();
+
+  const session = await getSessionFromServer()
 
   history.update([
     ...history.get(),
@@ -174,7 +177,7 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
       },
     },
     {
-      sessionID: "newid",
+      sessionID: session.id,
     }
   );
 
