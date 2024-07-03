@@ -1,14 +1,14 @@
 "use client";
 
 import { useTotalNutrient } from "@/lib/total-nutrient-context";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "@/components/ui/card";
 import {
   Nutrient,
   NutrientDetails,

@@ -8,9 +8,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuItem,
 } from "@/components/ui/dropdown-menu";
-import { LogoutButton } from "@/components/auth/logout-button";
 import { Button } from "@/components/ui/button";
-import { UserAvatar } from "../ui/user-avatar";
+import { UserAvatar } from "@/components/ui/user-avatar";
+import Link from "next/dist/client/link";
 
 interface HeaderProps {
   user: User;
@@ -39,9 +39,9 @@ export function Header({ user }: HeaderProps) {
             <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuItem>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <LogoutButton />
-            </DropdownMenuItem>
+            <Link href="/logout">
+              <DropdownMenuItem>Sign out</DropdownMenuItem>
+            </Link>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
