@@ -10,7 +10,7 @@ export function FeedBack() {
         className="hover:bg-transparent w-4 h-4 text-stone-400 hover:text-stone-900"
       >
         <ThumbsUpIcon className="w-4 h-4" />
-        <span className="sr-only">Upvote</span>
+        <span className="sr-only">Up vote</span>
       </Button>
       <Button
         variant="ghost"
@@ -18,7 +18,7 @@ export function FeedBack() {
         className="hover:bg-transparent w-4 h-4 text-stone-400 hover:text-stone-900"
       >
         <ThumbsDownIcon className="w-4 h-4" />
-        <span className="sr-only">Downvote</span>
+        <span className="sr-only">Down vote</span>
       </Button>
     </div>
   );

@@ -21,7 +21,7 @@ export function Header({ user }: HeaderProps) {
       <div className="flex justify-between items-center mx-auto p-4">
         <div className="flex items-center gap-2">
           <Eclipse className="w-6 h-6" />
-          <h1 className="font-semibold text-lg">SkyShaper</h1>
+          <h1 className="font-semibold text-gray-800 text-lg">SkyShaper</h1>
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

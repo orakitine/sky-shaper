@@ -55,7 +55,7 @@ export default function Home() {
     <main className="grid md:grid-cols-[1fr_28rem] h-screen">
       <div className="flex flex-col">
         <div className="flex flex-col flex-1 items-start gap-8 mx-auto p-4 pt-20 max-w-2xl">
-          <div className="min-w-[672px] h-px"></div>
+          <div className="min-w-[620px] h-px"></div>
           {messages.length === 0 && (
             <div className="mt-12 text-slate-400 self-center">
               <p>Start a conversation by typing a message.</p>
@@ -66,6 +66,7 @@ export default function Home() {
           <ChatList messages={messages} />
           <ChatScrollAnchor />
         </div>
+
         <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)}>
           <div className="bottom-0 sticky flex flex-col gap-1.5 bg-background mx-auto px-4 py-2 w-full max-w-2xl">
             <div className="relative">
@@ -94,7 +95,7 @@ export default function Home() {
           </div>
         </form>
       </div>
-      <div className="md:flex justify-center hidden bg-slate-50 pt-20">
+      <div className="md:flex justify-center hidden bg-slate-100 pt-20">
         <div className="fixed">
           <NutrientDetailsCard
             nutrientDetails={totalNutrientDetails}

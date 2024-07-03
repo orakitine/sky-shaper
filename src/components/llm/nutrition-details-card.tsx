@@ -33,7 +33,7 @@ export function NutrientDetailsCard({
   return (
     <Card className="sm:w-96">
       <CardHeader>
-        <CardTitle>{title}</CardTitle>
+        <CardTitle className="text-gray-800">{title}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-2 pb-4">

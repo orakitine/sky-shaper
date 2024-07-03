@@ -20,7 +20,7 @@
     --secondary-foreground: 240 38% 30%;
 
     --muted: 240 24% 94%;
-    --muted-foreground: 240 38% 40%;
+    --muted-foreground: 240 30% 70%;
 
     --accent: 240 38% 60%;
     --accent-foreground: 240 38% 10%;
@@ -80,64 +80,22 @@
     @apply text-primary;
   }
   h1 {
-    @apply text-4xl mb-6;
+    @apply text-4xl;
   }
   h2 {
-    @apply text-3xl mb-5;
+    @apply text-3xl;
   }
   h3 {
-    @apply text-2xl mb-4;
+    @apply text-2xl;
   }
   h4 {
-    @apply text-xl mb-3;
+    @apply text-xl;
   }
   h5 {
-    @apply text-lg mb-2;
+    @apply text-lg;
   }
   h6 {
-    @apply text-base mb-2;
-  }
-
-  /* Links */
-  a {
-    @apply text-primary underline;
-  }
-
-  /* Lists */
-  ul,
-  ol {
-    @apply pl-5 mb-4;
-  }
-  li {
-    @apply mb-1;
-  }
-
-  /* Form elements */
-  input[type="text"],
-  input[type="email"],
-  input[type="password"],
-  textarea {
-    @apply p-2 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary placeholder:text-gray-300;
-  }
-  button {
-    @apply px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary-foreground;
-  }
-
-  /* Tables */
-  table {
-    @apply w-full mb-4;
-  }
-  th,
-  td {
-    @apply p-2 border border-border;
-  }
-  th {
-    @apply bg-secondary text-secondary-foreground font-bold;
-  }
-
-  /* Blockquotes */
-  blockquote {
-    @apply pl-4 border-l-4 border-primary italic my-4;
+    @apply text-base;
   }
 
   /* Code blocks */

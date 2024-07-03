@@ -4,7 +4,7 @@ export function NutrientDetailsCardSkeleton() {
   return (
     <Card className="sm:max-w-80">
       <CardHeader>
-        <CardTitle>Nutrition Facts</CardTitle>
+        <CardTitle className="text-gray-800">Nutrition Facts</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="space-y-2 pb-4">
