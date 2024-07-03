@@ -1,4 +1,5 @@
 "use server";
+
 import { createAI, getMutableAIState } from "ai/rsc";
 import type { ReactNode } from "react";
 import type { ToolInvocation } from "ai";
@@ -11,10 +12,7 @@ import { getNutritionDetails } from "@/utils/edamam/nutrition-details";
 import { NutrientDetailsCard } from "@/components/llm/nutrition-details-card";
 import { FeedBack } from "@/components/feedback";
 import { NutrientDetailsCardSkeleton } from "@/components/llm/nutrition-details-card-skeleton";
-import { airbender } from "./setup";
-import { getSessionFromServer } from "@/app/(protected)/dashboard/getSession";
-
-const { llm: streamUI } = airbender.sdk("default");
+import { airbenderStreamUI } from "../../../airbender/airbender.setup";
 
 // This is initial message we send to LLM to instantiate the conversation
 // This gives the LLM some context for the conversation
@@ -52,10 +50,12 @@ export type ClientMessage = {
 export type AIState = ServerMessage[];
 export type UIState = ClientMessage[];
 
-export const sendMessage = async (message: string): Promise<ClientMessage> => {
+export const sendMessage = async (
+  message: string,
+  sessionID: string
+): Promise<ClientMessage> => {
   const history = getMutableAIState();
-
-  const session = await getSessionFromServer()
+  console.log("my session id is", { sessionID });
 
   history.update([
     ...history.get(),
@@ -65,7 +65,7 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
     },
   ]);
 
-  const reply = await streamUI(
+  const reply = await airbenderStreamUI(
     {
       model: openai("gpt-4o-2024-05-13"),
       system: content,
@@ -177,7 +177,7 @@ export const sendMessage = async (message: string): Promise<ClientMessage> => {
       },
     },
     {
-      sessionID: session.id,
+      sessionID,
     }
   );
 
@@ -193,3 +193,6 @@ export const AI = createAI({
   initialUIState: [] as UIState,
   actions: { sendMessage },
 });
+function getSessionFromServer() {
+  throw new Error("Function not implemented.");
+}

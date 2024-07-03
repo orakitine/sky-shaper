@@ -13,6 +13,7 @@ export const env = createEnv({
     EDAMAM_APP_ID: z.string(),
     NEXT_PUBLIC_SUPABASE_URL: z.string(),
     NEXT_PUBLIC_SUPABASE_ANON_KEY: z.string(),
+    NEXT_PUBLIC_AIRBENDER_PRODUCT_KEY: z.string(),
   },
   /*
    * Environment variables available on the client (and server).
@@ -32,5 +33,7 @@ export const env = createEnv({
     EDAMAM_APP_ID: process.env.EDAMAM_APP_ID,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    NEXT_PUBLIC_AIRBENDER_PRODUCT_KEY:
+      process.env.NEXT_PUBLIC_AIRBENDER_PRODUCT_KEY,
   },
 });

@@ -1,6 +1,6 @@
 "use client";
 
-import { getSessionFromServer } from "./getSession";
+import { getAirbenderSessionFromServer } from "./airbender.utils.server";
 
 type Config = {
   id: number;
@@ -19,7 +19,7 @@ type SessionResponse = {
   config: Config;
 };
 
-export const getSession = async (): Promise<SessionResponse> => {
+export const getAirbenderSession = async (): Promise<SessionResponse> => {
   // Check if the session is already saved
   const data = {
     session: sessionStorage.getItem("airbender-session"),
@@ -30,7 +30,7 @@ export const getSession = async (): Promise<SessionResponse> => {
   if (data.session && data.config) return data as SessionResponse;
 
   // Otherwise, get a new session
-  const newSession = await getSessionFromServer();
+  const newSession = await getAirbenderSessionFromServer();
 
   // Check if the response is an error
   if (isTypeOfErrorResponse(newSession)) throw new Error(newSession.message);

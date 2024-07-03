@@ -1,8 +1,9 @@
+import { env } from "@/env";
 import { setupAirbender, wrappedStreamUI } from "@airbend3r/client";
 
 // instead of ai/rsc
 const streamUI = wrappedStreamUI({
-  productKey: "5wq6ii3z80a",
+  productKey: env.NEXT_PUBLIC_AIRBENDER_PRODUCT_KEY,
   logInputs: true,
   logOutputs: true,
   shouldValidateBeforeLogging: false,
@@ -17,3 +18,5 @@ export const airbender = setupAirbender({
     },
   },
 });
+
+export const { llm: airbenderStreamUI } = airbender.sdk("default");

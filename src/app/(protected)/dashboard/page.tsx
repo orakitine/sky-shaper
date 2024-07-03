@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { useEnterSubmit } from "@/lib/use-enter-submit";
 import { SubmitHandler, useForm } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
-import { ArrowDown, ArrowUp, Eclipse } from "lucide-react";
+import { ArrowDown, ArrowUp } from "lucide-react";
 import { z } from "zod";
 import { useActions, useUIState } from "ai/rsc";
 import { AI } from "./actions";
@@ -15,7 +15,7 @@ import { UserMessage } from "@/components/llm/message";
 
 import { NutrientDetailsCard } from "@/components/llm/nutrition-details-card";
 import { useTotalNutrient } from "@/lib/total-nutrient-context";
-
+import { getAirbenderSession } from "@/airbender/airbender.utils.client";
 const chatSchema = z.object({
   message: z.string().min(1, "Message is required."),
 });
@@ -43,7 +43,8 @@ export default function Home() {
     ]);
 
     try {
-      const responseMessage = await sendMessage(value);
+      const { session } = await getAirbenderSession();
+      const responseMessage = await sendMessage(value, session);
       setMessages((currentMessages) => [...currentMessages, responseMessage]);
     } catch (error) {
       console.error(error);
