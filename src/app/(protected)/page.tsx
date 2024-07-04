@@ -12,3 +12,7 @@ export default function Home() {
     </main>
   );
 }
+
+// This ensures the page is always rendered on the server
+// which should resolve any static generation issues
+export const dynamic = "force-dynamic";
