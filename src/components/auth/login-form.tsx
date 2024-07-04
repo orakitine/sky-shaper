@@ -30,7 +30,7 @@ export function LoginForm() {
         password: data.password,
       });
       if (error) throw error;
-      router.push("/dashboard");
+      router.push("/");
     } catch (error: any) {
       setError(error.message);
     }

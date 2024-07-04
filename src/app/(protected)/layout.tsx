@@ -2,8 +2,8 @@ import { ReactNode } from "react";
 import { redirect } from "next/navigation";
 import { createServerClient } from "@/lib/supabase/server";
 import { TotalNutrientProvider } from "@/lib/total-nutrient-context";
-import { AI } from "./dashboard/actions";
-import { Header } from "@/components/dashboard/header";
+import { AI } from "./actions";
+import { Header } from "@/components/home/header";
 
 export default async function ProtectedLayout({
   children,
@@ -24,9 +24,9 @@ export default async function ProtectedLayout({
   return (
     <AI>
       <TotalNutrientProvider>
-        <div className="w-full min-h-screen">
+        <div className="w-full h-screen">
           <Header user={user} />
-          {children}
+          <div className="pt-[72px] h-screen-minus-header">{children}</div>
         </div>
       </TotalNutrientProvider>
     </AI>

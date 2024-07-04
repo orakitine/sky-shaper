@@ -30,7 +30,7 @@ export function ResetPasswordForm() {
         password: data.password,
       });
       if (error) throw error;
-      router.push("/dashboard");
+      router.push("/Í");
     } catch (error: any) {
       setError(error.message);
     }

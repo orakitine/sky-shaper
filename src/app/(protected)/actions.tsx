@@ -12,7 +12,7 @@ import { getNutritionDetails } from "@/utils/edamam/nutrition-details";
 import { NutrientDetailsCard } from "@/components/llm/nutrition-details-card";
 import { FeedBack } from "@/components/feedback";
 import { NutrientDetailsCardSkeleton } from "@/components/llm/nutrition-details-card-skeleton";
-import { airbenderStreamUI } from "../../../airbender/airbender.setup";
+import { airbenderStreamUI } from "../../airbender/airbender.setup";
 
 // This is initial message we send to LLM to instantiate the conversation
 // This gives the LLM some context for the conversation

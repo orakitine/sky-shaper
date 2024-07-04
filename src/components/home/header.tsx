@@ -17,7 +17,7 @@ interface HeaderProps {
 }
 export function Header({ user }: HeaderProps) {
   return (
-    <header className="z-10 fixed bg-background shadow-sm w-full h-16">
+    <header className="z-10 fixed bg-background shadow-sm w-full">
       <div className="flex justify-between items-center mx-auto p-4">
         <div className="flex items-center gap-2">
           <Eclipse className="w-6 h-6" />

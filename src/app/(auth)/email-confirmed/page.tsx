@@ -9,7 +9,7 @@ export default function EmailConfirmed() {
 
   useEffect(() => {
     const redirectTimer = setTimeout(() => {
-      router.push("/dashboard");
+      router.push("/");
     }, 5000); // Redirect after 5 seconds
 
     return () => clearTimeout(redirectTimer);
@@ -22,7 +22,7 @@ export default function EmailConfirmed() {
         Your email has been successfully confirmed. You will be redirected to
         the dashboard in a few seconds.
       </p>
-      <Button className="mt-5" onClick={() => router.push("/dashboard")}>
+      <Button className="mt-5" onClick={() => router.push("/")}>
         Go to Dashboard Now
       </Button>
     </>

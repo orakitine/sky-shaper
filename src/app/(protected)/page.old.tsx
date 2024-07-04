@@ -1,8 +1,8 @@
 "use client";
 export const dynamic = "force-dynamic";
 
-import { ChatList } from "@/components/chat-list";
-import { ChatScrollAnchor } from "@/components/chat-scroll-anchor";
+import { ChatList } from "@/components/chat/chat-list";
+import { ChatScrollAnchor } from "@/components/chat/chat-scroll-anchor";
 import { Button } from "@/components/ui/button";
 import { useEnterSubmit } from "@/lib/use-enter-submit";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -29,7 +29,7 @@ export default function Home() {
   const [messages, setMessages] = useUIState<typeof AI>();
   const { sendMessage } = useActions<typeof AI>();
 
-  const onSubmit: SubmitHandler<ChatInput> = async (data) => {
+  const handleSubmit: SubmitHandler<ChatInput> = async (data) => {
     const value = data.message.trim();
     formRef.current?.reset();
     if (!value) return;
