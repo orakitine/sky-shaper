@@ -38,7 +38,7 @@ export function NutrientDetailsCard({
       <CardContent>
         <div className="space-y-2 pb-4">
           {nutrientDetails.ingredients.map((ingredient, index) => (
-            <div className="text-muted-foreground text-sm" key={index}>
+            <div className="text-sm" key={index}>
               {ingredient.text}
             </div>
           ))}

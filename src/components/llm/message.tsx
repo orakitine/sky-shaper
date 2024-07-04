@@ -8,7 +8,7 @@ export function UserMessage({ children }: { children: ReactNode }) {
       <div className="flex justify-center items-center shadow-sm border rounded-md w-8 h-8 shrink-0">
         <UserIcon />
       </div>
-      <div className="flex-1 pt-1 text-muted-foreground">{children}</div>
+      <div className="flex-1 pt-1">{children}</div>
     </div>
   );
 }
@@ -30,7 +30,7 @@ export function BotMessage({
       >
         <Sparkle />
       </div>
-      <div className="flex-1 pt-1 text-muted-foreground">{children}</div>
+      <div className="flex-1 pt-1">{children}</div>
     </div>
   );
 }
@@ -52,7 +52,7 @@ export function BotCard({
       >
         <Sparkle />
       </div>
-      <div className="flex-1 pt-1 text-muted-foreground">{children}</div>
+      <div className="flex-1 pt-1">{children}</div>
     </div>
   );
 }
@@ -60,7 +60,7 @@ export function BotCard({
 export function AssistantMessage({ children }: { children: ReactNode }) {
   return (
     <div className="flex">
-      <div className="flex-1 pt-1 text-muted-foreground">{children}</div>
+      <div className="flex-1 pt-1">{children}</div>
     </div>
   );
 }
