@@ -1,18 +1,18 @@
 "use server";
 
-import { createAI, getMutableAIState } from "ai/rsc";
-import type { ReactNode } from "react";
-import type { ToolInvocation } from "ai";
-import { openai } from "@ai-sdk/openai";
-import { BotCard, BotMessage } from "@/components/llm/message";
-import { Loader2 } from "lucide-react";
-import { z } from "zod";
-import { env } from "@/env";
-import { getNutritionDetails } from "@/utils/edamam/nutrition-details";
-import { NutrientDetailsCard } from "@/components/llm/nutrition-details-card";
 import { FeedBack } from "@/components/feedback";
+import { BotCard, BotMessage } from "@/components/llm/message";
+import { NutrientDetailsCard } from "@/components/llm/nutrition-details-card";
 import { NutrientDetailsCardSkeleton } from "@/components/llm/nutrition-details-card-skeleton";
-import { airbenderStreamUI } from "../../airbender/airbender.setup";
+import { env } from "@/env";
+import { airbenderStreamUI } from "@/lib/airbender/airbender.setup";
+import { getNutritionDetails } from "@/utils/edamam/nutrition-details";
+import { openai } from "@ai-sdk/openai";
+import type { ToolInvocation } from "ai";
+import { createAI, getMutableAIState } from "ai/rsc";
+import { Loader2 } from "lucide-react";
+import type { ReactNode } from "react";
+import { z } from "zod";
 
 // This is initial message we send to LLM to instantiate the conversation
 // This gives the LLM some context for the conversation

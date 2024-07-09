@@ -1,8 +1,8 @@
 "use client";
 
-import { getAirbenderSession } from "@/airbender/airbender.utils.client";
 import { AI } from "@/app/(protected)/actions";
 import { UserMessage } from "@/components/llm/message";
+import { getAirbenderSession } from "@/lib/airbender/airbender.utils.client";
 import { useActions, useUIState } from "ai/rsc";
 import { ChatInput } from "./chat-input";
 import { ChatList } from "./chat-list";
