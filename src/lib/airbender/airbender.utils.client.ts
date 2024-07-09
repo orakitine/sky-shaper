@@ -49,3 +49,9 @@ export const getAirbenderSession = async (): Promise<SessionResponse> => {
     config: newSession.config,
   };
 };
+
+// delete the session from the session storage
+export const deleteAirbenderSession = () => {
+  sessionStorage.removeItem("airbender-session");
+  sessionStorage.removeItem("airbender-config");
+};

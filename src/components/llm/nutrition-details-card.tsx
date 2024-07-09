@@ -1,6 +1,5 @@
 "use client";
 
-import { useTotalNutrient } from "@/lib/total-nutrient-context";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,11 +8,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useTotalNutrient } from "@/lib/total-nutrient-context";
+import { cn } from "@/lib/utils";
 import {
   Nutrient,
   NutrientDetails,
 } from "@/utils/edamam/nutrition-details.types";
-import { cn } from "@/lib/utils";
 
 interface NutrientDetailsCardProps {
   nutrientDetails: NutrientDetails;

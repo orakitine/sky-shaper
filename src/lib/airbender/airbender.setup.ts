@@ -6,7 +6,7 @@ const streamUI = wrappedStreamUI({
   productKey: env.NEXT_PUBLIC_AIRBENDER_PRODUCT_KEY,
   logInputs: true,
   logOutputs: true,
-  shouldValidateBeforeLogging: false,
+  shouldValidateBeforeLogging: true,
 });
 
 export const airbender = setupAirbender({

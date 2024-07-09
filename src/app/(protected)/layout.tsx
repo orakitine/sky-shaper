@@ -1,9 +1,9 @@
-import { ReactNode } from "react";
-import { redirect } from "next/navigation";
+import { Header } from "@/components/home/header";
 import { createServerClient } from "@/lib/supabase/server";
 import { TotalNutrientProvider } from "@/lib/total-nutrient-context";
+import { redirect } from "next/navigation";
+import { ReactNode } from "react";
 import { AI } from "./actions";
-import { Header } from "@/components/home/header";
 
 export default async function ProtectedLayout({
   children,

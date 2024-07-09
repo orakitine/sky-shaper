@@ -2,11 +2,11 @@
 
 import { getAirbenderSession } from "@/airbender/airbender.utils.client";
 import { AI } from "@/app/(protected)/actions";
+import { UserMessage } from "@/components/llm/message";
 import { useActions, useUIState } from "ai/rsc";
+import { ChatInput } from "./chat-input";
 import { ChatList } from "./chat-list";
 import { ChatScrollAnchor } from "./chat-scroll-anchor";
-import { UserMessage } from "@/components/llm/message";
-import { ChatInput } from "./chat-input";
 
 export function ChatContainer() {
   const [messages, setMessages] = useUIState<typeof AI>();
