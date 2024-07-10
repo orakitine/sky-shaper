@@ -26,6 +26,6 @@ export async function GET(request: Request) {
 
   // If no code or wrong type, redirect to an error page or home page
   return NextResponse.redirect(
-    new URL("/email-confirmation-failed", request.url)
+    new URL("/email-confirmed?status=error", request.url)
   );
 }

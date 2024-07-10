@@ -1,11 +1,17 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
 import { createMiddlewareClient } from "@supabase/auth-helpers-nextjs";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
   const supabase = createMiddlewareClient({ req, res });
-  const noneAuthedPaths = ["/login", "/register", "/forgot-password"];
+  const noneAuthedPaths = [
+    "/login",
+    "/register",
+    "/forgot-password",
+    "/confirm-email",
+    "/email-confirmed",
+  ];
 
   const {
     data: { session },
@@ -14,6 +20,7 @@ export async function middleware(req: NextRequest) {
   // If the user is not signed in and the current path is not /login or /register,
   // redirect the user to /login
   if (!session && !noneAuthedPaths.includes(req.nextUrl.pathname)) {
+    // console.log("redirecting to /login because:", req.nextUrl.pathname);
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
