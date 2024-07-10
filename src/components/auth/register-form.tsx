@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { supabase } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { supabase } from "@/lib/supabase/client";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 type RegisterInputs = {
   email: string;
@@ -29,9 +29,6 @@ export function RegisterForm() {
       const { error } = await supabase.auth.signUp({
         email: data.email,
         password: data.password,
-        options: {
-          emailRedirectTo: `${window.location.origin}/callback`,
-        },
       });
       if (error) throw error;
       setConfirmationSent(true);
