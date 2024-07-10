@@ -1,26 +1,16 @@
-"use client";
-
+import { AutoRedirect } from "@/components/auth/auto-redirect";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import Link from "next/link";
 
-export default function EmailConfirmationStatus() {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const [status, setStatus] = useState(searchParams.get("status") || "unknown");
+export default function EmailConfirmed({
+  searchParams,
+}: {
+  searchParams: { status?: string };
+}) {
+  const status = searchParams.status || "unknown";
+  const redirectPath = "/"; // You can change this to any path you want to redirect to
 
-  useEffect(() => {
-    if (searchParams.get("status") === "success") {
-      const redirectTimer = setTimeout(() => {
-        router.push("/");
-      }, 5000); // Redirect after 5 seconds
-
-      return () => clearTimeout(redirectTimer);
-    }
-  }, [router]);
-
-  //https://skyshaper.rakitine.com/confirm-email?code=dd6a5cbb9733f827b6e77d6c021053da2e11761a7d5239708cb06964&type=signup
   const renderStatusMessage = () => {
     switch (status) {
       case "success":
@@ -60,7 +50,10 @@ export default function EmailConfirmationStatus() {
     <div className="space-y-4">
       <h1 className="font-bold text-2xl">Email Confirmation Status</h1>
       {renderStatusMessage()}
-      <Button onClick={() => router.push("/")}>Go to Dashboard Now</Button>
+      <Link href={redirectPath} passHref>
+        <Button>Go to Dashboard Now</Button>
+      </Link>
+      {status === "success" && <AutoRedirect path={redirectPath} />}
     </div>
   );
 }
