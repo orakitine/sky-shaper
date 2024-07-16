@@ -9,11 +9,13 @@ export function Sidebar() {
   return (
     <div className="md:flex justify-center hidden bg-slate-100 p-4">
       <div className="fixed">
+        test
         <NutrientDetailsCard
           nutrientDetails={totalNutrientDetails}
           title="Total"
           showFooter={false}
         />
+        test
       </div>
     </div>
   );

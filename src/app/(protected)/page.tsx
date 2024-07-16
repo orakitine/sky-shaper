@@ -1,18 +1,42 @@
+"use client";
+
 import { ChatContainer } from "@/components/chat/chat-container";
-import { Sidebar } from "@/components/home/sidebar";
-import { Suspense } from "react";
+import { Header } from "@/components/home/header";
+import { MobileSidebar } from "@/components/home/mobile-sidebar";
+import { NutrientDetailsCard } from "@/components/llm/nutrition-details-card";
+import { useTotalNutrient } from "@/lib/total-nutrient-context";
+import { useUser } from "@/lib/user-context";
+import { useState } from "react";
 
 export default function Home() {
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const { totalNutrientDetails } = useTotalNutrient();
+  const user = useUser();
+
+  if (!user) {
+    return null; // or a loading state
+  }
+
   return (
-    <main className="grid md:grid-cols-[1fr_28rem] h-screen-minus-header">
-      <Suspense fallback={<div>Loading chat...</div>}>
-        <ChatContainer />
-      </Suspense>
-      <Sidebar />
-    </main>
+    <>
+      <Header user={user} onOpenSidebar={() => setIsMobileSidebarOpen(true)} />
+      <div className="flex flex-1 pt-[72px]">
+        <ChatContainer className="flex-1" />
+        <div className="md:block hidden w-[420px]">
+          <div className="fixed p-4">
+            <NutrientDetailsCard
+              nutrientDetails={totalNutrientDetails}
+              title="Total"
+              showFooter={false}
+            />
+          </div>
+        </div>
+      </div>
+      <MobileSidebar
+        nutrientDetails={totalNutrientDetails}
+        isOpen={isMobileSidebarOpen}
+        onClose={() => setIsMobileSidebarOpen(false)}
+      />
+    </>
   );
 }
-
-// This ensures the page is always rendered on the server
-// which should resolve any static generation issues
-export const dynamic = "force-dynamic";

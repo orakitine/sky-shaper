@@ -1,9 +1,8 @@
-import { Header } from "@/components/home/header";
 import { createServerClient } from "@/lib/supabase/server";
-import { TotalNutrientProvider } from "@/lib/total-nutrient-context";
 import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 import { AI } from "./actions";
+import ClientLayout from "./client-layout";
 
 export default async function ProtectedLayout({
   children,
@@ -23,12 +22,7 @@ export default async function ProtectedLayout({
 
   return (
     <AI>
-      <TotalNutrientProvider>
-        <div className="w-full h-screen">
-          <Header user={user} />
-          <div className="pt-[72px] h-screen-minus-header">{children}</div>
-        </div>
-      </TotalNutrientProvider>
+      <ClientLayout user={user}>{children}</ClientLayout>
     </AI>
   );
 }
