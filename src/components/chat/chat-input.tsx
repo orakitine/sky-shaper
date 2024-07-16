@@ -1,10 +1,10 @@
 "use client";
 
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useEnterSubmit } from "@/lib/use-enter-submit";
 import { Button } from "@/components/ui/button";
-import TextareaAutosize from "react-textarea-autosize";
+import { useEnterSubmit } from "@/lib/hooks/use-enter-submit";
 import { ArrowUp } from "lucide-react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import TextareaAutosize from "react-textarea-autosize";
 
 type ChatInputProps = {
   onSubmit: (message: string) => void;

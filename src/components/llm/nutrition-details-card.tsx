@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useTotalNutrient } from "@/lib/total-nutrient-context";
+import { useTotalNutrient } from "@/lib/contexts/total-nutrient-context";
 import { cn } from "@/lib/utils";
 import {
   Nutrient,

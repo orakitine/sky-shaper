@@ -1,7 +1,7 @@
 "use client";
 
 import { NutrientDetailsCard } from "@/components/llm/nutrition-details-card";
-import { useTotalNutrient } from "@/lib/total-nutrient-context";
+import { useTotalNutrient } from "@/lib/contexts/total-nutrient-context";
 
 export function Sidebar() {
   const { totalNutrientDetails } = useTotalNutrient();

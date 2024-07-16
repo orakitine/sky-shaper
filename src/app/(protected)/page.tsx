@@ -4,8 +4,8 @@ import { ChatContainer } from "@/components/chat/chat-container";
 import { Header } from "@/components/home/header";
 import { MobileSidebar } from "@/components/home/mobile-sidebar";
 import { NutrientDetailsCard } from "@/components/llm/nutrition-details-card";
-import { useTotalNutrient } from "@/lib/total-nutrient-context";
-import { useUser } from "@/lib/user-context";
+import { useTotalNutrient } from "@/lib/contexts/total-nutrient-context";
+import { useUser } from "@/lib/contexts/user-context";
 import { useState } from "react";
 
 export default function Home() {
