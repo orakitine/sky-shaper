@@ -77,7 +77,7 @@ export const sendMessage = async (
       ),
       text: (thing: any) => {
         const { content, done, logId } = thing;
-        console.log("thing", thing);
+        // console.log("thing", thing);
         if (done) {
           history.done([...history.get(), { role: "assistant", content }]);
         }
