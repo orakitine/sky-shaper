@@ -75,13 +75,15 @@ export const sendMessage = async (
           <Loader2 className="w-5 animate-spin stroke-zinc-900" />
         </BotMessage>
       ),
-      text: ({ content, done }: any) => {
+      text: (thing: any) => {
+        const { content, done, logId } = thing;
+        console.log("thing", thing);
         if (done) {
           history.done([...history.get(), { role: "assistant", content }]);
         }
         return (
           <BotMessage>
-            {content} <FeedBack />
+            {content} <FeedBack logId={logId} />
           </BotMessage>
         );
       },
@@ -145,7 +147,7 @@ export const sendMessage = async (
                     Sorry, I could not find nutritional information for{" "}
                     {foodItemsStr}
                   </p>
-                  <FeedBack />
+                  <FeedBack logId={"tbd"} />
                 </BotCard>
               );
             } else {
@@ -164,7 +166,7 @@ export const sendMessage = async (
                   <p>
                     I have looked up nutritional information for {foodItemsStr}
                   </p>
-                  <FeedBack />
+                  <FeedBack logId={"tbd"} />
                   <NutrientDetailsCard
                     nutrientDetails={nutritionDetails}
                     size="compact"
@@ -180,6 +182,7 @@ export const sendMessage = async (
       sessionID,
     }
   );
+  // console.log("reply", reply);
 
   return {
     id: Date.now(),
@@ -193,6 +196,3 @@ export const AI = createAI({
   initialUIState: [] as UIState,
   actions: { sendMessage },
 });
-function getSessionFromServer() {
-  throw new Error("Function not implemented.");
-}

@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.33",
-    "@airbend3r/client": "^0.0.12",
+    "@airbend3r/client": "^0.1.0",
     "@hookform/resolvers": "^3.6.0",
     "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-dialog": "^1.1.1",
