@@ -182,7 +182,6 @@ export const sendMessage = async (
       sessionID,
     }
   );
-  // console.log("reply", reply);
 
   return {
     id: Date.now(),
