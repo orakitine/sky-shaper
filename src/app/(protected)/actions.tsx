@@ -52,10 +52,10 @@ export type UIState = ClientMessage[];
 
 export const sendMessage = async (
   message: string,
-  sessionID: string
+  sessionId: string
 ): Promise<ClientMessage> => {
   const history = getMutableAIState();
-  console.log("my session id is", { sessionID });
+  console.log("my session id is", { sessionId });
 
   history.update([
     ...history.get(),
@@ -179,7 +179,7 @@ export const sendMessage = async (
       },
     },
     {
-      sessionID,
+      sessionId: sessionId,
     }
   );
 
