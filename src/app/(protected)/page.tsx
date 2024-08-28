@@ -16,25 +16,21 @@ export default function Home() {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const { totalNutrientDetails } = useTotalNutrient();
   const user = useUser();
-  const [isInitialized, setIsInitialized] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      console.log("Initializing Airbender session");
+      deleteAirbenderSession();
+      getAirbenderSession().catch((error) => {
+        console.error("Failed to initialize Airbender session:", error);
+        // Handle the error appropriately (e.g., show a notification to the user)
+      });
+    }
+  }, [user]);
 
   if (!user) {
     return null; // or a loading state
   }
-
-  useEffect(() => {
-    if (!isInitialized) {
-      deleteAirbenderSession();
-      getAirbenderSession()
-        .catch((error) => {
-          console.error("Failed to initialize Airbender session:", error);
-          // Handle the error appropriately (e.g., show a notification to the user)
-        })
-        .finally(() => {
-          setIsInitialized(true);
-        });
-    }
-  }, [isInitialized]);
 
   return (
     <>
