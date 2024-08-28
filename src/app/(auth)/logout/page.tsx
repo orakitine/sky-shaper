@@ -1,8 +1,9 @@
 "use client";
 
+import { deleteAirbenderSession } from "@/lib/airbender/airbender.utils.client";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 export default function LogoutPage() {
   const router = useRouter();
@@ -11,7 +12,7 @@ export default function LogoutPage() {
   useEffect(() => {
     const handleLogout = async () => {
       await supabase.auth.signOut();
-      // TODO deleteAirbenderSession();
+      deleteAirbenderSession();
       router.push("/login");
     };
 
