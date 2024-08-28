@@ -1,14 +1,13 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { User } from "@supabase/supabase-js";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
-const UserContext = createContext<
-  | {
-      user: User | null;
-      setUser: React.Dispatch<React.SetStateAction<User | null>>;
-    }
-  | undefined
->(undefined);
+type UserContextType = {
+  user: User | null;
+  setUser: React.Dispatch<React.SetStateAction<User | null>>;
+};
+
+const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({
   children,
@@ -30,7 +29,8 @@ export function UserProvider({
     return () => {
       authListener.subscription.unsubscribe();
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array to run only once
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

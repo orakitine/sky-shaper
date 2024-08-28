@@ -25,7 +25,8 @@ export function useUser() {
     return () => {
       authListener.subscription.unsubscribe();
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array to run only once
 
   return user;
 }

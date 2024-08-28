@@ -4,31 +4,19 @@ import { ChatContainer } from "@/components/chat/chat-container";
 import { Header } from "@/components/home/header";
 import { MobileSidebar } from "@/components/home/mobile-sidebar";
 import { NutrientDetailsCard } from "@/components/llm/nutrition-details-card";
-import {
-  deleteAirbenderSession,
-  getAirbenderSession,
-} from "@/lib/airbender/airbender.utils.client";
+import { useAirbenderSession } from "@/lib/airbender/useAirbenderSession";
 import { useTotalNutrient } from "@/lib/contexts/total-nutrient-context";
 import { useUser } from "@/lib/contexts/user-context";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Home() {
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const { totalNutrientDetails } = useTotalNutrient();
   const user = useUser();
 
-  useEffect(() => {
-    if (user) {
-      console.log("Initializing Airbender session");
-      deleteAirbenderSession();
-      getAirbenderSession().catch((error) => {
-        console.error("Failed to initialize Airbender session:", error);
-        // Handle the error appropriately (e.g., show a notification to the user)
-      });
-    }
-  }, [user]);
+  const { isInitialized } = useAirbenderSession();
 
-  if (!user) {
+  if (!user || !isInitialized) {
     return null; // or a loading state
   }
 

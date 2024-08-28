@@ -9,9 +9,9 @@ export const giveFeedback = async (
     rating: number;
     id?: string;
   },
-  sessionId: string
+  sessionID: string
 ) => {
   return JSON.parse(
-    JSON.stringify(await airbender.logFeedback(logId, sessionId, feedback))
+    JSON.stringify(await airbender.logFeedback(logId, sessionID, feedback))
   );
 };
